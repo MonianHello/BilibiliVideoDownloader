@@ -1,9 +1,7 @@
 # Bilibili视频下载者
-=====
 这个也许是最简洁的一个版本吧（笑<br>
 把源码再整理一下之后会发上来赏心悦目的版本，虽然现在这个版本能阉割的都不要了<br>
-注意
------
+		注意
 这个批处理脚本需要Python的光环加持，并且要安装youtube-dl包<br>
 首次运行文件可以帮你处理youtube-dl的问题，但是python还是要你自己上网找怎么安<br>
 在Downloader的注释里面有链接，这个工具的用途就是方便你不用输入https://www.bilibili.com/video/av和-F -f_的参数了<br>
