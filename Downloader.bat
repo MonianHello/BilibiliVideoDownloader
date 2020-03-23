@@ -1,3 +1,5 @@
+
+@echo off
 :: -----------------------------------------
 :: 为了区别注释和待改善的部分 注释用两个: 待改善的部分用rem
 :: 现在需要解决的问题：
@@ -11,7 +13,11 @@
 :: 2020年1月25日 18:12:12     
 :: Happy new year!
 :: -----------------------------------------
+:: 对于av号转bv号的更新
+:: 事发较为突然，先保留av/bv双下载模式
+:: 2020年3月23日 19:28:52
 :Set
+:Homepage
 set bilibili=http://www.bilibili.com/video
 goto Main
 :Main
@@ -41,9 +47,17 @@ rem if "choose" == "b" goto bilibilichoice
 rem if "choose" == "e" goto elseweb
 rem if "choose" == "q" exit
 rem goto Bilibilichoice
+
 :Bilibilichoice
-@echo off
-cls
+echo [MonianHello]----------
+echo [MonianHello][a]av号
+echo [MonianHello][b]bv号
+echo [MonianHello]----------
+set /p choose=[MonianHello]请输入:
+if %choose% == a goto av
+if %choose% == b goto bv
+goto bv
+:av
 set /p bilibilinomber=[MonianHello]请输入av号(数字):
 echo [MonianHello]加载时间较长,请耐心等待...
 youtube-dl -F %bilibili%/av%bilibilinomber%
@@ -53,7 +67,22 @@ set /p fnumber=
 youtube-dl -f%fnumber% %bilibili%/av%bilibilinomber%
 echo [MonianHello]已成功下载到%desktopdrive%
 pause
-goto Homepage
+cls
+goto Bilibilichoice
+rem 2020年3月23日 21:52:15
+rem 以下为临时，以后如果有谁破解出了BV->AV的算法请一定记得告诉下我
+:bv
+set /p bilibilinomber=[MonianHello]请输入bv号(数字与字母，注意大小写，不用输入"BV"):
+echo [MonianHello]加载时间较长,请耐心等待...
+youtube-dl -F %bilibili%/bv%bilibilinomber%
+echo ↑
+echo [MonianHello]请输入箭头所指数字(该行后有best表示为最佳视频源)
+set /p fnumber=
+youtube-dl -f%fnumber% %bilibili%/bv%bilibilinomber%
+echo [MonianHello]已成功下载到%desktopdrive%
+pause
+cls
+goto Bilibilichoice
 rem :first
 rem start https://jingyan.baidu.com/article/3c48dd34cec9c2e10be358e4.html
 rem echo 首先请安装Python,安装方法在弹出的浏览器窗口中.
