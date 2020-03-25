@@ -52,13 +52,18 @@ rem goto Bilibilichoice
 echo [MonianHello]----------
 echo [MonianHello][a]av号
 echo [MonianHello][b]bv号
+echo [MonianHello][c]av-bv号互转
 echo [MonianHello]----------
 set /p choose=[MonianHello]请输入:
 if %choose% == a goto av
 if %choose% == b goto bv
-goto bv
+if %choose% == c av-bvmain.bat
+cls
+goto Bilibilichoice
 :av
 set /p bilibilinomber=[MonianHello]请输入av号(数字):
+echo [MonianHello]转换后的bv号
+python changeavtobv.py -av %bilibilinomber%
 echo [MonianHello]加载时间较长,请耐心等待...
 youtube-dl -F %bilibili%/av%bilibilinomber%
 echo ↑
@@ -71,14 +76,17 @@ cls
 goto Bilibilichoice
 rem 2020年3月23日 21:52:15
 rem 以下为临时，以后如果有谁破解出了BV->AV的算法请一定记得告诉下我
+rem 已经找出算法 2020年3月25日 01:57:41
 :bv
-set /p bilibilinomber=[MonianHello]请输入bv号(数字与字母，注意大小写，不用输入"BV"):
+set /p bilibilinomber=[MonianHello]请输入bv号(数字与字母，注意大小写，需要输入"BV"):
+echo [MonianHello]转换后的av号
+python changebvtoav.py -bv %bilibilinomber%
 echo [MonianHello]加载时间较长,请耐心等待...
-youtube-dl -F %bilibili%/bv%bilibilinomber%
+youtube-dl -F %bilibili%/%bilibilinomber%
 echo ↑
 echo [MonianHello]请输入箭头所指数字(该行后有best表示为最佳视频源)
 set /p fnumber=
-youtube-dl -f%fnumber% %bilibili%/bv%bilibilinomber%
+youtube-dl -f%fnumber% %bilibili%/%bilibilinomber%
 echo [MonianHello]已成功下载到%desktopdrive%
 pause
 cls
